@@ -1,0 +1,1516 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{import} \PY{n}{odeint}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    Class for particle in 2D Writing RK4 for 2D using particle1d.py
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{class} \PY{n+nc}{Particle2D} \PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{n}{m} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.001}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{n}{z0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{=} \PY{n}{vx0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{=} \PY{n}{vz0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{l+m+mf}{0.0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tf} \PY{o}{=} \PY{n}{tf}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt} \PY{o}{=} \PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time (s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x (m)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{zlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z (m)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vxlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZus{}x (m/s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vzlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZus{}z (m/s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n}{npoints} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tf}\PY{o}{/}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{}starting at t = 0.0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints} \PY{o}{=} \PY{n}{npoints}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf}\PY{p}{,}\PY{n}{npoints}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} include final timepoint}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{xv0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}initial x\PYZhy{}position and x\PYZhy{}velocity}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{zv0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}initial z\PYZhy{}position and z\PYZhy{}velocity}
+            \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} first dimension (x)}
+                \PY{n}{a1\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                
+                \PY{c+c1}{\PYZsh{} second dimension (y) }
+                \PY{n}{a1\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Trajectory, Initializing}
+                \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                    \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                    \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{class} \PY{n+nc}{Particle3D} \PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{n}{m} \PY{o}{=} \PY{l+m+mf}{1.0}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{y0}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vy0}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.001}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{n}{x0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{n}{z0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{=} \PY{n}{vx0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy} \PY{o}{=} \PY{n}{vy0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{=} \PY{n}{vz0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{=} \PY{l+m+mf}{0.0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tf} \PY{o}{=} \PY{n}{tf}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt} \PY{o}{=} \PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time (s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{xlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x (m)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{zlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z (m)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vxlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZus{}x (m/s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vzlabel} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZus{}z (m/s)}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n}{npoints} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tf}\PY{o}{/}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{}starting at t = 0.0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints} \PY{o}{=} \PY{n}{npoints}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf}\PY{p}{,}\PY{n}{npoints}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} include final timepoint}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{xv0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}initial x\PYZhy{}position and x\PYZhy{}velocity}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{zv0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}initial z\PYZhy{}position and z\PYZhy{}velocity}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{yv0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}initial y\PYZhy{}position and x\PYZhy{}velocity}
+            \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} first dimension (x)}
+                \PY{n}{a1\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                
+                \PY{c+c1}{\PYZsh{} second dimension (y) }
+                \PY{n}{a1\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Trajectory, Initializing}
+                \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                    \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                    \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{problem-1}{%
+\section{Problem 1:}\label{problem-1}}
+
+Using RK4 written above. SOlving x and y spearetly.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{class} \PY{n+nc}{DragParticle}\PY{p}{(}\PY{n}{Particle2D}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{30.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m} \PY{o}{=} \PY{n}{m}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{z0}\PY{p}{,}\PY{n}{vx0}\PY{p}{,}\PY{n}{vz0}\PY{p}{,}\PY{n}{tf}\PY{p}{,}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{} calling the super class}
+            \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{6.5} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}
+                \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5}
+                \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300} \PY{c+c1}{\PYZsh{} T in Kelvins}
+                \PY{n}{ro0} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{} sea level air density}
+                \PY{n}{ro} \PY{o}{=} \PY{n}{ro0} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{n}{T}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{alpha}
+                \PY{n}{Fx} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)} \PY{c+c1}{\PYZsh{}drag force in x direction}
+                \PY{n}{Fz} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)} \PY{c+c1}{\PYZsh{}drag force in z direction}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{Fx}\PY{p}{,} \PY{n}{Fz} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{p}{]}\PY{p}{)}
+            \PY{k}{def} \PY{n+nf}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}if constant force use this}
+                \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8} \PY{c+c1}{\PYZsh{} gravitational acceleration m/s\PYZca{}2}
+                \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{6.5} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3} \PY{c+c1}{\PYZsh{}k/m given in the problem}
+                \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{} given in the problem}
+                \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300} \PY{c+c1}{\PYZsh{} Temperature in Kelvin}
+                \PY{n}{ro0} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{} air density at sea level in kg/m\PYZca{}3}
+                \PY{n}{ro} \PY{o}{=} \PY{n}{ro0}
+                \PY{n}{Fx} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}
+                \PY{n}{Fz} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{Fx}\PY{p}{,} \PY{n}{Fz} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{p}{]}\PY{p}{)}
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Just rewriting the same RK4 but using the constant F}
+                \PY{n}{a1\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                
+                \PY{n}{a1\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k1\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a2\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k2\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a3\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k3\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n}{a4\PYZus{}2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                \PY{n}{k4\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+            \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory\PYZus{}constant}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} calculating trajectory for constant force case}
+                \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                    \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                    \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                    \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step\PYZus{}constant}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{projectile} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{80}\PY{p}{)}
+        \PY{n}{projectile}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{projectile\PYZus{}noDrag} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{80}\PY{p}{)}
+        \PY{n}{projectile\PYZus{}noDrag}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{projectile\PYZus{}constant} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{80}\PY{p}{)}
+        \PY{n}{projectile\PYZus{}constant}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}constant}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adiabatic Approximation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile\PYZus{}constant}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile\PYZus{}constant}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Constant Air Density}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile\PYZus{}noDrag}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile\PYZus{}noDrag}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No Air Density}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{height Z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Maximum Range vs launching Angle:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{range\PYZus{}case1} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{}with Drag}
+         \PY{n}{range\PYZus{}case2} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} No drag}
+         \PY{n}{v} \PY{o}{=} \PY{l+m+mi}{50} \PY{c+c1}{\PYZsh{}finding angle at low velocity}
+         \PY{n}{angles} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{k}{for} \PY{n}{angle} \PY{o+ow}{in} \PY{n}{angles}\PY{p}{:} \PY{c+c1}{\PYZsh{} components of V in x and y directions:}
+             \PY{n}{vx\PYZus{}initial} \PY{o}{=} \PY{n}{v}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{angle}\PY{p}{)}\PY{p}{)}
+             \PY{n}{vz\PYZus{}initial} \PY{o}{=} \PY{n}{v}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{angle}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Drag\PYZus{}case} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{n}{vx\PYZus{}initial}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{n}{vz\PYZus{}initial}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{Drag\PYZus{}case}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}setting A = 0 for no drag}
+             \PY{n}{NoDrag\PYZus{}case} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{n}{vx\PYZus{}initial}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{n}{vz\PYZus{}initial}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{NoDrag\PYZus{}case}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+             \PY{n}{range\PYZus{}case1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{Drag\PYZus{}case}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{range\PYZus{}case2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{NoDrag\PYZus{}case}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{range\PYZus{}case1}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adiabatic}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{range\PYZus{}case2}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No Drag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Launch Angle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Range (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{angles}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{range\PYZus{}case1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{angles}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{range\PYZus{}case2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+45
+45
+
+    \end{Verbatim}
+
+    corresponding angles are 45 for adiabatic and 45 for No drag as well. 45
+is what I was expecting.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{range\PYZus{}case1} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{}with Drag}
+         \PY{n}{range\PYZus{}case2} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} No drag}
+         \PY{n}{v} \PY{o}{=} \PY{l+m+mi}{500} \PY{c+c1}{\PYZsh{}finding angles at high velocity }
+         \PY{n}{angles} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)} \PY{c+c1}{\PYZsh{} going from small angle to sraigh up, 90 degrees for every 10 degrees}
+         \PY{k}{for} \PY{n}{angle} \PY{o+ow}{in} \PY{n}{angles}\PY{p}{:} \PY{c+c1}{\PYZsh{} components of V in x and y directions:}
+             \PY{n}{vx\PYZus{}initial} \PY{o}{=} \PY{n}{v}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{angle}\PY{p}{)}\PY{p}{)}
+             \PY{n}{vz\PYZus{}initial} \PY{o}{=} \PY{n}{v}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{angle}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Drag\PYZus{}case} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{n}{vx\PYZus{}initial}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{n}{vz\PYZus{}initial}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{Drag\PYZus{}case}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+             \PY{n}{NoDrag\PYZus{}case} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{n}{vx\PYZus{}initial}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{n}{vz\PYZus{}initial}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{NoDrag\PYZus{}case}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+             \PY{n}{range\PYZus{}case1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{Drag\PYZus{}case}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{range\PYZus{}case2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{NoDrag\PYZus{}case}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{range\PYZus{}case1}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adiabatic}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,}\PY{n}{range\PYZus{}case2}\PY{p}{,} \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No Drag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Launch Angle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Range (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{angles}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{range\PYZus{}case1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{angles}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{range\PYZus{}case2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+35
+45
+
+    \end{Verbatim}
+
+    corresponding angles are 35 for Adiabatic model and 45 for no drag case
+
+    We expect the max range angle to be around 45. At relatively low
+velocity (50m/s) we see that there is almost no detectable affect from
+the drag force with respect to max range angle. For higher speeds like
+500 m/s the maximum range anlge is smaller because the projectile is
+experiencing more resistance going while traveling to a higher y,
+resistance decreases and it will reach higher y in this case.
+
+    \hypertarget{part-b}{%
+\section{Part b}\label{part-b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{class} \PY{n+nc}{gofy}\PY{p}{(}\PY{n}{Particle2D}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} g of y is g as a function of y}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{5.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{2.0}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m} \PY{o}{=} \PY{n}{m}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{z0}\PY{p}{,}\PY{n}{vx0}\PY{p}{,}\PY{n}{vz0}\PY{p}{,}\PY{n}{tf}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Re} \PY{o}{=} \PY{l+m+mi}{6378000} 
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8} \PY{o}{*} \PY{p}{(}\PY{n}{Re} \PY{o}{/} \PY{p}{(}\PY{n}{Re} \PY{o}{+} \PY{n}{z}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{6.5} \PY{o}{*} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}
+                 \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5}
+                 \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300}
+                 \PY{n}{rho0} \PY{o}{=} \PY{l+m+mf}{1.225}
+                 \PY{n}{rho} \PY{o}{=} \PY{n}{rho0} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{z}\PY{p}{)}\PY{o}{/}\PY{n}{T}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{alpha}
+                 \PY{n}{Fx} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{rho} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}
+                 \PY{n}{Fz} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)} \PY{o}{*} \PY{n}{rho} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{Fx}\PY{p}{,} \PY{n}{Fz} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}No Drag}
+         \PY{n}{constant\PYZus{}g} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{600}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{150}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gofy} \PY{o}{=} \PY{n}{gofy}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{600}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{150}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{gofy}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{gofy}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{gofy}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g(y)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}No Drag}
+         \PY{n}{constant\PYZus{}g} \PY{o}{=} \PY{n}{DragParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{800}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gofy\PYZus{}} \PY{o}{=} \PY{n}{gofy}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.00}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{800}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{gofy\PYZus{}}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{constant\PYZus{}g}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{gofy\PYZus{}}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{gofy\PYZus{}}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g(z)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/ipykernel\_launcher.py:13: RuntimeWarning: invalid value encountered in double\_scalars
+  del sys.path[0]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-2}{%
+\section{Problem 2}\label{problem-2}}
+
+    Z is vertical direction going down the dam. X is the forward direction.
+Doing th cross prodoct in the Magnus force, the force is in the X
+dirextion if omega is in y direction for backspin.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{class} \PY{n+nc}{SpinParticle}\PY{p}{(}\PY{n}{Particle2D}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{50.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m} \PY{o}{=} \PY{n}{m}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy} \PY{o}{=} \PY{n}{wy}
+                 \PY{n}{npoints} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tf}\PY{o}{/}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{}starting at t = 0.0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints} \PY{o}{=} \PY{n}{npoints}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf}\PY{p}{,}\PY{n}{npoints}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} include final timepoint}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{z0}\PY{p}{,}\PY{n}{vx0}\PY{p}{,}\PY{n}{vz0}\PY{p}{,}\PY{n}{tf}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                 \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                 \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{v} \PY{o}{=} \PY{l+m+mf}{0.001}
+              \PY{c+c1}{\PYZsh{} drag force x direction}
+                 \PY{n}{ki\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                     \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                     \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                     \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{Fd\PYZus{}x}
+             \PY{c+c1}{\PYZsh{} z\PYZhy{}component of drag force}
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                 \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{ki\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n}{vz} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                     \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                     \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{p}{)}   
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                     \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{Fd\PYZus{}z}    
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{wy}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}self.m= 9}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8} \PY{c+c1}{\PYZsh{} gravitational acceleration m/s\PYZca{}2}
+                 \PY{c+c1}{\PYZsh{}wy= 10}
+                 \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.25}
+                 \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{r}\PY{o}{*}\PY{n}{wy}\PY{o}{/}\PY{p}{(}\PY{n}{v}\PY{o}{+}\PY{o}{.}\PY{l+m+mi}{001}\PY{p}{)}
+                 \PY{n}{Cl} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{s}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{)}
+                 \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{} given in the problem}
+                 \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300} \PY{c+c1}{\PYZsh{} Temperature in Kelvin}
+                 \PY{n}{ro0} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{} air density at sea level in kg/m\PYZca{}3}
+                 \PY{n}{ro} \PY{o}{=} \PY{n}{ro0}
+                 \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                 \PY{n}{FMx} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{wy}\PY{o}{*}\PY{n}{vz}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                 \PY{n}{FMz} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{wy}\PY{o}{*}\PY{n}{vx}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{FMx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g} \PY{o}{+} \PY{n}{FMz}\PY{p}{]}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Just rewriting the same RK4 but with F backspin and FM}
+         
+                 \PY{c+c1}{\PYZsh{}ax\PYZus{}1 = (Fx1+Fx2) / m}
+                 \PY{c+c1}{\PYZsh{}kx\PYZus{}1 = f(vx,ax\PYZus{}1)*dt }
+         
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}backspin(self, x, z, vx, vz, wy, t):}
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}x(self, x, z vx, vz t):}
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag x \PYZdq{}, self.F\PYZus{}D\PYZus{}x(self.x, self.z, self.vx, self.vz, self.t))}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag z \PYZdq{}, self.F\PYZus{}D\PYZus{}z(self.x, self.z, self.vx, self.vz, self.t))}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}other \PYZdq{}, self.F\PYZus{}backspin(self.x, self.z, self.vx, self.vz, self.wy, self.t))}
+                         
+                 \PY{n}{a1\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k1\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a2\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k2\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a3\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k3\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a4\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k4\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                  \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                 \PY{n}{a1\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k1\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a2\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k2\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a3\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k3\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a4\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k4\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+         \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k1 = \PYZsq{},k1\PYZus{}z[0])}
+         \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k2 = \PYZsq{},k2\PYZus{}z[0])}
+         \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k3 = \PYZsq{},k3\PYZus{}z[0])}
+         \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k4 = \PYZsq{},k4\PYZus{}z[0])}
+         \PY{c+c1}{\PYZsh{}         print (\PYZsq{}t = \PYZsq{},self.t)}
+                 
+             \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} calculating trajectory}
+                 \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{tarray} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{}if ii in range(self.npoints):}
+                 \PY{k}{while} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{tarray}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+                     \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                     \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                     \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                     \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)} 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{tarray}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}class SpinParticle(Particle2D):}
+         \PY{c+c1}{\PYZsh{}def \PYZus{}\PYZus{}init\PYZus{}\PYZus{}(self, m = 1, x0 = 0.0, z0 = 0.0, vx0 = 1.0, vz0 = 0.0, tf = 50.0, dt = 0.01, A = 1.0, wy=10,):}
+         \PY{n}{projectile} \PY{o}{=} \PY{n}{SpinParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{projectile10} \PY{o}{=} \PY{n}{SpinParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{projectile}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{p}{)}
+         \PY{n}{projectile10}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{all-the-graphs-below-are-only-drawn-till-the-basketball-hits-the-ground.-both-for-x-and-z.}{%
+\section{All the graphs below are only drawn till the basketball hits
+the ground. both for X and
+Z.}\label{all-the-graphs-below-are-only-drawn-till-the-basketball-hits-the-ground.-both-for-x-and-z.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile.z\PYZus{}RK4, lw = 2, label = \PYZdq{}Height vs Time\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}print(projectile.z\PYZus{}RK4)}
+         \PY{c+c1}{\PYZsh{}print(projectile.tarray)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Backspin and Drag no initial V in Z direction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile10.z\PYZus{}RK4, label = \PYZdq{}Backspin and Drag no initial V in Z direction\PYZdq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final t = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+final t =  7.8
+
+    \end{Verbatim}
+
+    Z goes from initial 100m to 0 in just below 8 seconds (7.8 s) if no
+initial velocity in Z (vertical) direction .
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile.z\PYZus{}RK4, lw = 2, label = \PYZdq{}Height vs Time\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}print(projectile.z\PYZus{}RK4)}
+         \PY{c+c1}{\PYZsh{}print(projectile.tarray)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile0.z\PYZus{}RK4, label = \PYZdq{}Backspin and Drag no initial V in Z direction\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} include final timepoint}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile10}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Backspin+Drag w/ 20m/s initial V in Z dir}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final t = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{tarray}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+final t =  11.4
+
+    \end{Verbatim}
+
+    Z goes up and then fall back down and hits the ground about 11.4 seconds
+after. (we expect it to take longer)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile10}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Backspin and Drag no initial V in x direction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final x = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+final x =  78.2246247704
+
+    \end{Verbatim}
+
+    In the case of initial velocity in the X direction, basketball moves
+backwards in the x direction due to backspin while going up, then it
+switched direction as its going down and moves forward in X. It will
+stop moving forward at t = 11.4 seconds which is when it hits the
+ground, where z=0. it will go about net 78.2 meters forward in the x
+direction
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile10}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trajectory of basketball with backspin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{part-b}{%
+\section{Part b}\label{part-b}}
+
+Assuming there is only side spin, and particle having initial forward
+velocity Vx. I will check the effect of side spin on range.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{class} \PY{n+nc}{SideSpinParticle}\PY{p}{(}\PY{n}{Particle2D}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{y0}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{vy0}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{50.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{wz}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m} \PY{o}{=} \PY{n}{m}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz} \PY{o}{=} \PY{n}{wz}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{=} \PY{n}{y0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{=}\PY{n}{vy0}
+                 \PY{n}{npoints} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tf}\PY{o}{/}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{}starting at t = 0.0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints} \PY{o}{=} \PY{n}{npoints}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf}\PY{p}{,}\PY{n}{npoints}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} include final timepoint}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{z0}\PY{p}{,}\PY{n}{vx0}\PY{p}{,}\PY{n}{vz0}\PY{p}{,}\PY{n}{tf}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vy}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                 \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                 \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{vy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{v} \PY{o}{=} \PY{l+m+mf}{0.001}
+              \PY{c+c1}{\PYZsh{} drag force x direction}
+                 \PY{n}{ki\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                     \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                     \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                     \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{Fd\PYZus{}x}
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}y}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,}\PY{n}{vy}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                 \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                 \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{v} \PY{o}{=} \PY{l+m+mf}{0.001}
+              \PY{c+c1}{\PYZsh{} drag force y direction}
+                 \PY{n}{ki\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                     \PY{n}{jy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}y} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}y}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jy}
+                     \PY{n}{Fd\PYZus{}y} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}y} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vy}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vy}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{jy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}y} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}y}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jy}
+                     \PY{n}{Fd\PYZus{}y} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}y} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vy}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vy}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}FDY = \PYZdq{}, Fd\PYZus{}y,\PYZsq{} vy = \PYZsq{},vy)}
+                 \PY{k}{return} \PY{n}{Fd\PYZus{}y}
+             \PY{c+c1}{\PYZsh{} z\PYZhy{}component of drag force}
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,}\PY{n}{vy}\PY{p}{,}\PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                 \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                 \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                 \PY{n}{ki\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n}{vz} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                 \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                     \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                     \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{p}{)}   
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                     \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                     \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{Fd\PYZus{}z}    
+             \PY{k}{def} \PY{n+nf}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vy}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{wz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}self.m= 9}
+                 \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8} \PY{c+c1}{\PYZsh{} gravitational acceleration m/s\PYZca{}2}
+                 \PY{c+c1}{\PYZsh{}wy= 10}
+                 \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.25}
+                 \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{vy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{=} \PY{n}{r}\PY{o}{*}\PY{n}{wz}\PY{o}{/}\PY{p}{(}\PY{n}{v}\PY{o}{+}\PY{o}{.}\PY{l+m+mi}{001}\PY{p}{)}
+                 \PY{n}{Cl} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{s}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{)}
+                 \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{} given in the problem}
+                 \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300} \PY{c+c1}{\PYZsh{} Temperature in Kelvin}
+                 \PY{n}{ro0} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{} air density at sea level in kg/m\PYZca{}3}
+                 \PY{n}{ro} \PY{o}{=} \PY{n}{ro0}
+                 \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                 \PY{n}{FMx} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{wz}\PY{o}{*}\PY{n}{vy}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                 \PY{n}{FMy} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{wz}\PY{o}{*}\PY{n}{vx}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{FMx}\PY{p}{,} \PY{n}{FMy}\PY{p}{]}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Just rewriting the same RK4 but with F backspin and FM}
+         
+                 \PY{c+c1}{\PYZsh{}ax\PYZus{}1 = (Fx1+Fx2) / m}
+                 \PY{c+c1}{\PYZsh{}kx\PYZus{}1 = f(vx,ax\PYZus{}1)*dt }
+         
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}backspin(self, x, z, vx, vz, wy, t):}
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}x(self, x, z vx, vz t):}
+                 \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag x \PYZdq{}, self.F\PYZus{}D\PYZus{}x(self.x, self.z, self.vx, self.vz, self.t))}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag z \PYZdq{}, self.F\PYZus{}D\PYZus{}z(self.x, self.z, self.vx, self.vz, self.t))}
+                 \PY{c+c1}{\PYZsh{}print(\PYZdq{}other \PYZdq{}, self.F\PYZus{}backspin(self.x, self.z, self.vx, self.vz, self.wy, self.t))}
+                         
+                 \PY{n}{a1\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k1\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a2\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k2\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a3\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k3\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a4\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k4\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 
+                 \PY{n}{a1\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}y}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k1\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n}{a1\PYZus{}y}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a2\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{+}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}y}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{+}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k2\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}y}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a3\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{+}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}y}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{+}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k3\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}y}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a4\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{o}{+}\PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}y}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k4\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{o}{+}\PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}y}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 
+                 \PY{c+c1}{\PYZsh{}print (\PYZsq{}k1 = \PYZsq{},k1\PYZus{}y[0])}
+                 \PY{c+c1}{\PYZsh{}print (\PYZsq{}k2 = \PYZsq{},k2\PYZus{}y[0])}
+                 \PY{c+c1}{\PYZsh{}print (\PYZsq{}k3 = \PYZsq{},k3\PYZus{}y[0])}
+                 \PY{c+c1}{\PYZsh{}print (\PYZsq{}k4 = \PYZsq{},k4\PYZus{}y[0])}
+                 \PY{c+c1}{\PYZsh{}print (\PYZsq{}t = \PYZsq{},self.t)}
+                 
+                  \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                 \PY{n}{a1\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k1\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a2\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k2\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a3\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k3\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n}{a4\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                 \PY{n}{k4\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                 
+             \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory\PYZus{}sidespin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} calculating trajectory}
+                 \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{y\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vy\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{tarray} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{k}{while} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{}if(count\PYZpc{}10==0):print (\PYZsq{}processing step = \PYZsq{},count, \PYZsq{}z = \PYZsq{},self.z,\PYZsq{}x = \PYZsq{},self.x,\PYZsq{}y = \PYZsq{},self.y)}
+                     \PY{c+c1}{\PYZsh{}count+=1}
+                     \PY{n}{tarray}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+                     \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                     \PY{n}{y\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+                     \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                     \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                     \PY{n}{vy\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy}\PY{p}{)}
+                     \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vy\PYZus{}RK4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)} 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{tarray}\PY{p}{)}
+                 \PY{n}{vxf} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{vyf} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vy\PYZus{}RK4}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{vzf} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}class SpinParticle(Particle2D):}
+         \PY{c+c1}{\PYZsh{}def \PYZus{}\PYZus{}init\PYZus{}\PYZus{}(self, m = 1, x0 = 0.0, z0 = 0.0, vx0 = 1.0, vz0 = 0.0, tf = 50.0, dt = 0.01, A = 1.0, wy=10,):}
+         \PY{n}{projectile} \PY{o}{=} \PY{n}{SideSpinParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wz}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{projectile}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}sidespin}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/opt/conda/lib/python3.6/site-packages/ipykernel\_launcher.py:26: RuntimeWarning: overflow encountered in exp
+/opt/conda/lib/python3.6/site-packages/ipykernel\_launcher.py:47: RuntimeWarning: overflow encountered in exp
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2271.38407886
+2271.38407886
+-9.97984331632
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sidespin and Drag no initial V in x direction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile10.z\PYZus{}RK4, label = \PYZdq{}Backspin and Drag no initial V in Z direction\PYZdq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sidespin and Drag no initial V in x direction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile10.z\PYZus{}RK4, label = \PYZdq{}Backspin and Drag no initial V in Z direction\PYZdq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final x = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+final x =  24662.6422756
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{tarray}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{y\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sidespin and Drag no initial V in x direction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}ax.plot(projectile.tarray, projectile10.z\PYZus{}RK4, label = \PYZdq{}Backspin and Drag no initial V in Z direction\PYZdq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{time (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile}\PY{o}{.}\PY{n}{y\PYZus{}RK4}\PY{p}{,} \PY{n}{projectile}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trajectory of basketball with backspin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{}vf = np.sqrt(vxf**2+vyf**2+vzf**2)}
+         \PY{n}{vf} \PY{o}{=} \PY{l+m+mf}{3211.69}
+         \PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}
+         \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+         \PY{n}{vx0}\PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{Delta\PYZus{}E} \PY{o}{=} \PY{n}{m}\PY{o}{*}\PY{n}{g}\PY{o}{*}\PY{l+m+mi}{100} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{n}{vx0}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{m}\PY{o}{*}\PY{n}{vf}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Delta\PYZus{}E}\PY{p}{)}
+         \PY{n}{W\PYZus{}drag} \PY{o}{=} \PY{n}{F\PYZus{}D\PYZus{}x}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{F\PYZus{}D\PYZus{}Y}\PY{o}{*}\PY{n}{y} \PY{o}{+} \PY{n}{F\PYZus{}D\PYZus{}z}\PY{o}{*}\PY{n}{z}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-3198235.1733910004
+
+    \end{Verbatim}
+
+    \hypertarget{part-d}{%
+\section{part d}\label{part-d}}
+
+    It is not reasonable to assume the angular velocity is constant, due to
+frictional force. Friction will make ω smaller thorugh the flight. The
+total torque opposes the rotational motion which is itself proportional
+to the angular velocity. Hence the angular velocity changed in time.
+
+ω(t) = ω(0) exp (−t/τ )
+
+For Back Spin case, using variable omega:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{k}{class} \PY{n+nc}{OmegaSpinParticle}\PY{p}{(}\PY{n}{Particle2D}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{50.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m} \PY{o}{=} \PY{n}{m}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{=} \PY{n}{A}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy} \PY{o}{=} \PY{n}{wy}
+                  \PY{n}{npoints} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{tf}\PY{o}{/}\PY{n}{dt}\PY{p}{)} \PY{c+c1}{\PYZsh{}starting at t = 0.0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{npoints} \PY{o}{=} \PY{n}{npoints}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf}\PY{p}{,}\PY{n}{npoints}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{} include final timepoint}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{x0}\PY{p}{,}\PY{n}{z0}\PY{p}{,}\PY{n}{vx0}\PY{p}{,}\PY{n}{vz0}\PY{p}{,}\PY{n}{tf}\PY{p}{,}\PY{n}{dt}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                  \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                  \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                  \PY{k}{if} \PY{n}{v} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{v} \PY{o}{=} \PY{l+m+mf}{0.001}
+               \PY{c+c1}{\PYZsh{} drag force x direction}
+                  \PY{n}{ki\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n}{v} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                  \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                      \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                      \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                      \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{jx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                      \PY{n}{Cd\PYZus{}x} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}x}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jx}
+                      \PY{n}{Fd\PYZus{}x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}x} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vx}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vx}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{Fd\PYZus{}x}
+              \PY{c+c1}{\PYZsh{} z\PYZhy{}component of drag force}
+              \PY{k}{def} \PY{n+nf}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{vc} \PY{o}{=} \PY{l+m+mi}{10}
+                  \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8}
+                  \PY{n}{ro} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{}sea level}
+                  \PY{n}{a} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{0.25} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{0.16} \PY{c+c1}{\PYZsh{}given}
+                  \PY{n}{ki\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n}{vz} \PY{o}{\PYZhy{}} \PY{n}{vc}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{4}
+                  \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{n}{vc}\PY{p}{:}
+                      \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/} \PY{l+m+mi}{4}\PY{p}{)}
+                      \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                      \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{p}{)}   
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{jz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ki\PYZus{}z}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                      \PY{n}{Cd\PYZus{}z} \PY{o}{=} \PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{ki\PYZus{}z}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{o}{*}\PY{n}{jz}
+                      \PY{n}{Fd\PYZus{}z} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{Cd\PYZus{}z} \PY{o}{*} \PY{n}{ro} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{A} \PY{o}{*} \PY{n}{vz}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{vz}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{Fd\PYZus{}z}    
+              \PY{k}{def} \PY{n+nf}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{vx}\PY{p}{,} \PY{n}{vz}\PY{p}{,} \PY{n}{wy}\PY{p}{,} \PY{n}{t}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{}self.m= 9}
+                  \PY{n}{g} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{9.8} \PY{c+c1}{\PYZsh{} gravitational acceleration m/s\PYZca{}2}
+                  \PY{c+c1}{\PYZsh{}wy= 10}
+                  \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{0.25}
+                  \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{vx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{n}{vz}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                  \PY{n}{s} \PY{o}{=} \PY{n}{r}\PY{o}{*}\PY{n}{wy}\PY{o}{/}\PY{p}{(}\PY{n}{v}\PY{o}{+}\PY{o}{.}\PY{l+m+mi}{001}\PY{p}{)}
+                  \PY{n}{Cl} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{s}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{0.4}\PY{p}{)}
+                  \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{2.5} \PY{c+c1}{\PYZsh{} given in the problem}
+                  \PY{n}{T} \PY{o}{=} \PY{l+m+mi}{300} \PY{c+c1}{\PYZsh{} Temperature in Kelvin}
+                  \PY{n}{ro0} \PY{o}{=} \PY{l+m+mf}{1.225} \PY{c+c1}{\PYZsh{} air density at sea level in kg/m\PYZca{}3}
+                  \PY{n}{ro} \PY{o}{=} \PY{n}{ro0}
+                  \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{*}\PY{n}{r}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                  \PY{n}{FMx} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{wy}\PY{o}{*}\PY{n}{vz}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                  \PY{n}{FMz} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{Cl} \PY{o}{*} \PY{n}{ro}\PY{o}{*} \PY{n}{A}\PY{o}{*}\PY{n}{r}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{wy}\PY{o}{*}\PY{n}{vx}\PY{p}{)}\PY{o}{/}\PY{n}{s}
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{FMx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}\PY{o}{*}\PY{n}{g} \PY{o}{+} \PY{n}{FMz}\PY{p}{]}\PY{p}{)}
+              \PY{k}{def} \PY{n+nf}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Just rewriting the same RK4 but with F backspin and FM}
+          
+                  \PY{c+c1}{\PYZsh{}ax\PYZus{}1 = (Fx1+Fx2) / m}
+                  \PY{c+c1}{\PYZsh{}kx\PYZus{}1 = f(vx,ax\PYZus{}1)*dt }
+          
+                  \PY{c+c1}{\PYZsh{}def F\PYZus{}backspin(self, x, z, vx, vz, wy, t):}
+                  \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}x(self, x, z vx, vz t):}
+                  \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                  \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag x \PYZdq{}, self.F\PYZus{}D\PYZus{}x(self.x, self.z, self.vx, self.vz, self.t))}
+                  \PY{c+c1}{\PYZsh{}print(\PYZdq{}drag z \PYZdq{}, self.F\PYZus{}D\PYZus{}z(self.x, self.z, self.vx, self.vz, self.t))}
+                  \PY{c+c1}{\PYZsh{}print(\PYZdq{}other \PYZdq{}, self.F\PYZus{}backspin(self.x, self.z, self.vx, self.vz, self.wy, self.t))}
+                          
+                  \PY{n}{a1\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k1\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n}{a1\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a2\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k2\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a3\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k3\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a4\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}x}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k4\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}x}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                   \PY{c+c1}{\PYZsh{}def F\PYZus{}D\PYZus{}z(self,x, z,vx, vz, t):}
+                  \PY{n}{a1\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k1\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{,} \PY{n}{a1\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a2\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k2\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k1\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a2\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a3\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k3\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a3\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{a4\PYZus{}z} \PY{o}{=} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{wy}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{F\PYZus{}D\PYZus{}z}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{m}
+                  \PY{n}{k4\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{o}{+}\PY{n}{k3\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{a4\PYZus{}z}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{k1\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+} \PY{n}{k4\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6} \PY{o}{+} \PY{p}{(}\PY{n}{k2\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{k3\PYZus{}z}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+                  \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dt}
+                  \PY{n}{wt} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{o}{/}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k1 = \PYZsq{},k1\PYZus{}z[0])}
+          \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k2 = \PYZsq{},k2\PYZus{}z[0])}
+          \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k3 = \PYZsq{},k3\PYZus{}z[0])}
+          \PY{c+c1}{\PYZsh{}         print (\PYZsq{}k4 = \PYZsq{},k4\PYZus{}z[0])}
+          \PY{c+c1}{\PYZsh{}         print (\PYZsq{}t = \PYZsq{},self.t)}
+                  
+              \PY{k}{def} \PY{n+nf}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} calculating trajectory}
+                  \PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{tarray} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{omega} \PY{o}{=}  \PY{p}{[}\PY{p}{]}
+                  \PY{c+c1}{\PYZsh{}if ii in range(self.npoints):}
+                  \PY{k}{while} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{tarray}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+                      \PY{n}{x\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+                      \PY{n}{z\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z}\PY{p}{)}
+                      \PY{n}{vx\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx}\PY{p}{)}
+                      \PY{n}{vz\PYZus{}RK4}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz}\PY{p}{)}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{RK4\PYZus{}step\PYZus{}x}\PY{p}{(}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}RK4}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{z\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{z\PYZus{}RK4}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vx\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vx\PYZus{}RK4}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vz\PYZus{}RK4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vz\PYZus{}RK4}\PY{p}{)} 
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{tarray}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{c+c1}{\PYZsh{}class SpinParticle(Particle2D):}
+         \PY{c+c1}{\PYZsh{}def \PYZus{}\PYZus{}init\PYZus{}\PYZus{}(self, m = 1, x0 = 0.0, z0 = 0.0, vx0 = 1.0, vz0 = 0.0, tf = 50.0, dt = 0.01, A = 1.0, wy=10,):}
+         \PY{n}{projectile} \PY{o}{=} \PY{n}{OmegaSpinParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mf}{20.0}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{projectile10} \PY{o}{=} \PY{n}{OmegaSpinParticle}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{l+m+mf}{0.62}\PY{p}{,} \PY{n}{x0} \PY{o}{=} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z0} \PY{o}{=} \PY{l+m+mf}{100.0}\PY{p}{,} \PY{n}{vx0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vz0} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{tf} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{dt} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{wy}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{projectile}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{p}{)}
+         \PY{n}{projectile10}\PY{o}{.}\PY{n}{RK4\PYZus{}trajectory\PYZus{}backspin}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{tarray} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{endpoint} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{projectile10}\PY{o}{.}\PY{n}{x\PYZus{}RK4}\PY{p}{,} \PY{n}{projectile10}\PY{o}{.}\PY{n}{z\PYZus{}RK4}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trajectory of basketball with backspin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{z (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 432x288 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
